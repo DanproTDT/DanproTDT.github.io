@@ -1,31 +1,128 @@
 ---
-const title = Astro.props.title;
+const { title } = Astro.props;
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+            rel="stylesheet"
+    />
+    <title>{title}</title>
+</head>
+<body>
+<header class="flex justify-end px-6 py-4">
+    <label for="language-selector" class="sr-only">Idioma</label>
+    <select
+            id="language-selector"
+            class="bg-zinc-800 text-white px-3 py-1 rounded border border-zinc-600"
+    >
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
+</header>
+
+<main class="px-6">
+    <slot />
+</main>
+
+<script>
+    async function translateText(text: string, targetLang:string) {
+        if (!text || !targetLang) return text;
+
+        try {
+            const res = await fetch("/api/translate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text,
+                    target_lang: targetLang
+                })
+            });
+
+            const data = await res.json();
+            return data.translated || text;
+        } catch (err) {
+            console.error("Translation error:", err);
+            return text;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const selector = document.getElementById("language-selector");
+
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+            if (el && el.textContent && !el.getAttribute("data-original")) {
+                el.setAttribute("data-original", el.textContent.trim());
+            }
+        });
+
+        async function applyTranslation(lang:string) {
+            const elements = document.querySelectorAll("[data-i18n]");
+            if (lang === "es") {
+                for (const el of elements) {
+                    const original = el.getAttribute("data-original");
+                    if (original) el.textContent = original;
+                }
+                document.documentElement.lang = lang;
+                localStorage.setItem("lang", lang);
+                return;
+            }
+            for (const el of elements) {
+                const original = el.getAttribute("data-original");
+                if (!original) continue;
+
+                const translated = await translateText(original, lang);
+                el.textContent = translated;
+            }
+
+            document.documentElement.lang = lang;
+            localStorage.setItem("lang", lang);
+            document.documentElement.lang = lang;
+            localStorage.setItem("lang", lang);
+        }
+
+
+        selector?.addEventListener("change", async event => {
+            const target = event.target;
+            if (target && target instanceof HTMLSelectElement) {
+                const lang = target.value;
+                await applyTranslation(lang);
+            }
+        });
+
+        const savedLang = localStorage.getItem("lang");
+        if (savedLang && selector instanceof HTMLSelectElement) {
+            selector.value = savedLang;
+            applyTranslation(savedLang);
+        }
+    });
+</script>
+
 
 <style>
-	html,
-	body {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: 'Lora', sans-serif;
-		background-color: #181818;
-		color: #fff;
-	}
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Lora', sans-serif;
+        background-color: #181818;
+        color: #fff;
+    }
+
+    select:focus {
+        outline: none;
+        border-color: #3b82f6;
+    }
 </style>
+</body>
+</html>

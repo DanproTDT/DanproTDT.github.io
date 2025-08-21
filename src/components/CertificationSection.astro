@@ -41,11 +41,11 @@ const certInProgress = [
 ---
 
 <section class="my-20">
-    <h2 class="text-2xl font-semibold mb-2">Certificaciones</h2>
+    <h2 class="text-2xl font-semibold mb-2 " data-i18n>Certificaciones</h2>
     <hr class="mb-6 border-zinc-600">
 
     <!-- Certificaciones IT -->
-    <h3 class="text-xl font-semibold mb-4 text-zinc-300">Certificaciones IT</h3>
+    <h3 class="text-xl font-semibold mb-4 text-zinc-300" data-i18n>Certificaciones IT</h3>
     <div class="space-y-6">
         {certIT.map(({ name, issuer, Icon }) => (
                 <div class="flex items-center gap-6 mb-4">
@@ -53,15 +53,15 @@ const certInProgress = [
                         <Icon />
                     </div>
                     <div>
-                        <p class="text-lg font-semibold">{name}</p>
-                        <p class="text-sm text-zinc-400">Otorgado por: {issuer}</p>
+                        <p class="text-lg font-semibold" data-i18n>{name}</p>
+                        <p class="text-sm text-zinc-400" data-i18n>Emitido por: {issuer}</p>
                     </div>
                 </div>
         ))}
     </div>
 
     <!-- Certificaciones generales -->
-    <h3 class="text-xl font-semibold mt-10 mb-4 text-zinc-300">Certificaciones Generales</h3>
+    <h3 class="text-xl font-semibold mt-10 mb-4 text-zinc-300" data-i18n>Certificaciones Generales</h3>
     <div class="space-y-6">
         {certGeneral.map(({ name, issuer, Icon }) => (
                 <div class="flex items-center gap-6 mb-4">
@@ -70,14 +70,14 @@ const certInProgress = [
                     </div>
                     <div>
                         <p class="text-lg font-semibold">{name}</p>
-                        <p class="text-sm text-zinc-400">Otorgado por: {issuer}</p>
+                        <p class="text-sm text-zinc-400" data-i18n>Emitido por: {issuer}</p>
                     </div>
                 </div>
         ))}
     </div>
 
     <!-- Certificaciones en proceso -->
-    <h3 class="text-xl font-semibold mt-10 mb-4 text-zinc-300">En Proceso</h3>
+    <h3 class="text-xl font-semibold mt-10 mb-4 text-zinc-300" data-i18n>En Proceso</h3>
     <div class="space-y-6">
         {certInProgress.map(({ name, issuer, Icon }) => (
                 <div class="flex items-center gap-6 mb-4 opacity-70">
@@ -86,7 +86,7 @@ const certInProgress = [
                     </div>
                     <div>
                         <p class="text-lg font-semibold">{name}</p>
-                        <p class="text-sm text-zinc-400">Otorgado por: {issuer}</p>
+                        <p class="text-sm text-zinc-400" data-i18n>Emitdo por: {issuer}</p>
                     </div>
                 </div>
         ))}

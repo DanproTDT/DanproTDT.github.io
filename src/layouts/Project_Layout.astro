@@ -87,6 +87,14 @@ const layoutClass = styles[variant] ?? styles.markdown;
     </style>
 </head>
 <body class="min-h-screen antialiased">
+<select
+        onchange="location.search = '?lang=' + this.value"
+        class="bg-zinc-800 text-white px-3 py-1 rounded border border-zinc-600"
+>
+    <option value="es">Español</option>
+    <option value="en">English</option>
+</select>
+
 <main class={`${layoutClass} max-w-5xl mx-auto px-6 py-20`}>
     <slot />
 </main>

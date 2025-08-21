@@ -2,6 +2,8 @@
 const projectTitle = Astro.props.projectTitle;
 const projectDescription = Astro.props.projectDescription;
 const projectLink = Astro.props.projectLink;
+const dataI18nTitle = Astro.props.dataI18nTitle;
+const dataI18nDescription = Astro.props.dataI18nDescription;
 const image = Astro.props.image;
 import ArrowLink from "@assets/icons/arrow-link.astro";
 ---
@@ -17,14 +19,13 @@ import ArrowLink from "@assets/icons/arrow-link.astro";
                 class="text-xl inline-flex items-center gap-2 hover:opacity-60 transition mb-2"
                 href={projectLink}
         >
-            <h3 class="text-xl font-semibold inline-block">{projectTitle}</h3>
+            <h3 class="text-xl font-semibold inline-block" data-i18n={dataI18nTitle}>{projectTitle}</h3>
             <span class="text-zinc-400">
         <ArrowLink size="w-5 h-5" />
       </span>
         </a>
 
-        <!-- ✅ Aquí se respeta el salto de línea -->
-        <div class="text-zinc-400 text-sm whitespace-pre-line pr-2 mb-4">
+        <div class="text-zinc-400 text-sm whitespace-pre-line pr-2 mb-4" data-i18n={dataI18nDescription}>
             {projectDescription}
         </div>
 

@@ -1,8 +1,12 @@
 ---
 import Layout from "../layouts/Project_Layout.astro";
-import { Content } from "../components/Projects/Homelab/Homelab.md";
+import { Content as ContentES } from "../components/Projects/Homelab/Homelab_es.md";
+import { Content as ContentEN } from "../components/Projects/Homelab/Homelab_en.md";
+
+const lang = Astro.url.searchParams.get("lang") ?? "es";
+const Content = lang === "en" ? ContentEN : ContentES;
 ---
 
-<Layout title="Proyecto Homelab" variant="markdown">
+<Layout title="Homelab">
     <Content />
 </Layout>
