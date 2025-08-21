@@ -2,11 +2,38 @@
 import Layout from "../layouts/Project_Layout.astro";
 import { Content as ContentES } from "../components/Projects/Homelab/Homelab_es.md";
 import { Content as ContentEN } from "../components/Projects/Homelab/Homelab_en.md";
-
-const lang = Astro.url.searchParams.get("lang") ?? "es";
-const Content = lang === "en" ? ContentEN : ContentES;
 ---
 
 <Layout title="Homelab">
-    <Content />
+    <div id="content-es" style="display: none;">
+        <ContentES />
+    </div>
+    <div id="content-en" style="display: none;">
+        <ContentEN />
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const lang = new URLSearchParams(window.location.search).get("lang") || "es";
+            const es = document.getElementById("content-es");
+            const en = document.getElementById("content-en");
+
+            if (lang === "en") {
+                en.style.display = "block";
+                es.style.display = "none";
+            } else {
+                es.style.display = "block";
+                en.style.display = "none";
+            }
+
+            // Actualiza el selector también
+            const selector = document.getElementById("language-selector");
+            if (selector instanceof HTMLSelectElement) {
+                selector.value = lang;
+            }
+
+            // Actualiza el atributo lang del <html>
+            document.documentElement.lang = lang;
+        });
+    </script>
 </Layout>

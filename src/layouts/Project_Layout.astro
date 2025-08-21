@@ -12,7 +12,6 @@ const styles = {
 
 const layoutClass = styles[variant] ?? styles.markdown;
 ---
-
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
@@ -83,20 +82,46 @@ const layoutClass = styles[variant] ?? styles.markdown;
 
         body {
             background-color: #18181b;
+            margin: 0;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
         }
     </style>
 </head>
 <body class="min-h-screen antialiased">
-<select
-        onchange="location.search = '?lang=' + this.value"
-        class="bg-zinc-800 text-white px-3 py-1 rounded border border-zinc-600"
->
-    <option value="es">Español</option>
-    <option value="en">English</option>
-</select>
+<div class="language-selector">
+    <select
+            id="language-selector"
+            onchange="location.search = '?lang=' + this.value"
+            class="bg-zinc-800 text-white px-3 py-1 rounded border border-zinc-600"
+    >
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
+
+</div>
 
 <main class={`${layoutClass} max-w-5xl mx-auto px-6 py-20`}>
     <slot />
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const selector = document.getElementById("language-selector");
+        const params = new URLSearchParams(window.location.search);
+        const lang = params.get("lang") || "es";
+
+        if (selector instanceof HTMLSelectElement) {
+            selector.value = lang;
+        }
+
+        document.documentElement.lang = lang;
+    });
+</script>
 </body>
 </html>
