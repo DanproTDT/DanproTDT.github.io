@@ -1,0 +1,94 @@
+---
+const { title = "Documentación", variant = "markdown" } = Astro.props as {
+    title?: string;
+    variant?: "markdown" | "claro" | "invertido";
+};
+
+const styles = {
+    markdown: "prose prose-invert prose-neutral bg-zinc-900 text-zinc-100",
+    claro: "prose prose-sky bg-white text-gray-900",
+    invertido: "prose prose-invert bg-neutral-950 text-neutral-100",
+};
+
+const layoutClass = styles[variant] ?? styles.markdown;
+---
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style>
+        .prose {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .prose h1 {
+            font-size: 2.25rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .prose h2 {
+            font-size: 1.75rem;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .prose h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .prose p {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .prose ul,
+        .prose ol {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding-left: 1.25rem;
+        }
+
+        .prose li {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .prose img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prose code {
+            background-color: #27272a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .prose pre {
+            background-color: #1e1e20;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        body {
+            background-color: #18181b;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+<main class={`${layoutClass} max-w-5xl mx-auto px-6 py-20`}>
+    <slot />
+</main>
+</body>
+</html>

@@ -1,25 +1,29 @@
 ---
 import ProjectCard from '@components/ProjectCard.astro'
-import Typescript from '@assets/icons/typescript.astro';
-import React from '@assets/icons/react.astro';
-import Supabase from '@assets/icons/supabase.astro';
-import Tailwind from '@assets/icons/tailwind.astro';
+import PfSense from '@assets/icons/pfsense.astro';
+import Splunk from '@assets/icons/splunk.astro';
+import Ubuntu from '@assets/icons/ubuntu.astro';
+import WindowsAD from '@assets/icons/windowsad.astro';
+import Nessus from '@assets/icons/nessus.astro';
+import Nmap from '@assets/icons/nmap.astro';
+const Prodesc1 = `\nImplementación de Windows Active Directory para la gestión de usuarios y grupos
+\nArquitectura de red a través de pfSense, estableciendo reglas de firewall y segmentación de tráfico
+\nDespliegue de servidor web vulnerable a ataques para pruebas de penetración
+\nImplementación de herramientas de seguridad (Firewall, IDS, IPS, DLP, SIEM, Gestor de vulnerabilidades) como pfSense, Suricata, OpenDLP, Splunk, Nessus`;
 ---
 
 <section class="my-20">
   <h2 class="text-2xl font-semibold mb-2">Proyectos</h2>
   <hr class="mb-6 border-zinc-600">
-
-  <ProjectCard projectTitle="Neovim" projectDescription="Vim-fork focused on extensibility and usability" projectLink="https://neovim.io" image="/images/neovim.webp">
-    <React />
-    <Supabase />
-    <Tailwind />
-    <Typescript />
-  </ProjectCard>
-
-  <ProjectCard projectTitle="React" projectDescription="The library for web and native user interfaces." projectLink="https://react.dev/" image="/images/react.webp">
-    <React />
-    <Supabase />
-    <Tailwind />
-  </ProjectCard>
+  <!-- Proyecto con descripción multilínea -->
+  <ProjectCard
+      projectTitle="Implementación de laboratorio virtual para pruebas de seguridad"
+      projectDescription={Prodesc1}
+      projectLink="/Project_Homelab/index.html"
+  >
+    <PfSense />
+    <Splunk />
+    <Nessus />
+    <WindowsAD />
+    <Ubuntu />
 </section>
