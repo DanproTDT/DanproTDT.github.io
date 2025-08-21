@@ -1,0 +1,30 @@
+---
+const languages = [
+    {
+        name: "Español",
+        level: "Nativo",
+    },
+    {
+        name: "Inglés",
+        level: "Intermedio Avanzado (B2)",
+    },
+    {
+        name: "Japonés",
+        level: "Básico",
+    },
+];
+---
+
+<section class="my-20">
+    <h2 class="text-2xl font-semibold mb-2">Idiomas</h2>
+    <hr class="mb-6 border-zinc-600">
+
+    <ul class="space-y-4">
+        {languages.map(({ name, level }) => (
+                <li class="border border-zinc-700 rounded-md p-4">
+                    <p class="text-lg font-medium">{name}</p>
+                    <p class="text-sm text-zinc-400">Dominio: {level}</p>
+                </li>
+        ))}
+    </ul>
+</section>

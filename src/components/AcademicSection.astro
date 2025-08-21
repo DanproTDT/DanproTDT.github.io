@@ -1,0 +1,25 @@
+---
+import UPC from "@assets/icons/upc.astro";
+
+const AcadDesc1 = `Estudiante de 6to ciclo en Ingeniería de Sistemas de Información
+\n*   Decimo Superior
+\n*   Marzo 2023 - Actualidad`;
+---
+
+<section class="my-20">
+    <h2 class="text-2xl font-semibold mb-2">Formación Académica</h2>
+    <hr class="mb-6 border-zinc-600">
+    <div class="mb-8 flex items-start gap-4">
+        <div class="mt-1 shrink-0">
+            <UPC />
+        </div>
+        <div>
+            <a href="https://upc.edu.pe" class="text-lg font-semibold text-sky-400 hover:underline">
+                Universidad Peruana de Ciencias Aplicadas (UPC)
+            </a>
+            <p class="whitespace-pre-line text-sm text-zinc-300 mt-2">
+                {AcadDesc1}
+            </p>
+        </div>
+    </div>
+</section>

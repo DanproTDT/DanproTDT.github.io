@@ -1,0 +1,94 @@
+---
+import SecurityCert from "@assets/icons/securitycert.astro";
+import LinuxCert from "@assets/icons/linuxcert.astro";
+import IBMCert from "@assets/icons/ibmcert.astro";
+import PentestCert from "@assets/icons/pentestcert.astro";
+import IELTS from "@assets/icons/ieltscert.astro";
+
+const certIT = [
+    {
+        name: "CompTIA Security+ SY0-701 (2025)",
+        issuer: "CompTIA",
+        Icon: SecurityCert,
+    },
+    {
+        name: "IBM Cybersecurity Analyst (2024)",
+        issuer: "Coursera, IBM",
+        Icon: IBMCert,
+    },
+];
+
+const certGeneral = [
+    {
+        name: "IELTS Academic 6.5 (2025)",
+        issuer: "IELTS",
+        Icon: IELTS,
+    },
+];
+
+const certInProgress = [
+    {
+        name: "CompTIA Linux+ XK0-006",
+        issuer: "CompTIA",
+        Icon: LinuxCert,
+    },
+    {
+        name: "CompTIA Pentest+ PT0-003",
+        issuer: "CompTIA",
+        Icon: PentestCert,
+    },
+];
+---
+
+<section class="my-20">
+    <h2 class="text-2xl font-semibold mb-2">Certificaciones</h2>
+    <hr class="mb-6 border-zinc-600">
+
+    <!-- Certificaciones IT -->
+    <h3 class="text-xl font-semibold mb-4 text-zinc-300">Certificaciones IT</h3>
+    <div class="space-y-6">
+        {certIT.map(({ name, issuer, Icon }) => (
+                <div class="flex items-center gap-6 mb-4">
+                    <div class="shrink-0 w-14 h-14">
+                        <Icon />
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">{name}</p>
+                        <p class="text-sm text-zinc-400">Otorgado por: {issuer}</p>
+                    </div>
+                </div>
+        ))}
+    </div>
+
+    <!-- Certificaciones generales -->
+    <h3 class="text-xl font-semibold mt-10 mb-4 text-zinc-300">Certificaciones Generales</h3>
+    <div class="space-y-6">
+        {certGeneral.map(({ name, issuer, Icon }) => (
+                <div class="flex items-center gap-6 mb-4">
+                    <div class="shrink-0 w-14 h-14">
+                        <Icon />
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">{name}</p>
+                        <p class="text-sm text-zinc-400">Otorgado por: {issuer}</p>
+                    </div>
+                </div>
+        ))}
+    </div>
+
+    <!-- Certificaciones en proceso -->
+    <h3 class="text-xl font-semibold mt-10 mb-4 text-zinc-300">En Proceso</h3>
+    <div class="space-y-6">
+        {certInProgress.map(({ name, issuer, Icon }) => (
+                <div class="flex items-center gap-6 mb-4 opacity-70">
+                    <div class="shrink-0 w-14 h-14">
+                        <Icon />
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">{name}</p>
+                        <p class="text-sm text-zinc-400">Otorgado por: {issuer}</p>
+                    </div>
+                </div>
+        ))}
+    </div>
+</section>
