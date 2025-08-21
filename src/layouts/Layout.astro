@@ -33,11 +33,11 @@ const { title } = Astro.props;
 </main>
 
 <script>
-    async function translateText(text: string, targetLang:string) {
+    async function translateText(text: string, targetLang: string) {
         if (!text || !targetLang) return text;
 
         try {
-            const res = await fetch("/api/translate", {
+            const res = await fetch("https://us-central1-tranlate-api-469716.cloudfunctions.net/translate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -65,7 +65,7 @@ const { title } = Astro.props;
             }
         });
 
-        async function applyTranslation(lang:string) {
+        async function applyTranslation(lang: string) {
             const elements = document.querySelectorAll("[data-i18n]");
             if (lang === "es") {
                 for (const el of elements) {
@@ -76,6 +76,7 @@ const { title } = Astro.props;
                 localStorage.setItem("lang", lang);
                 return;
             }
+
             for (const el of elements) {
                 const original = el.getAttribute("data-original");
                 if (!original) continue;
@@ -86,10 +87,7 @@ const { title } = Astro.props;
 
             document.documentElement.lang = lang;
             localStorage.setItem("lang", lang);
-            document.documentElement.lang = lang;
-            localStorage.setItem("lang", lang);
         }
-
 
         selector?.addEventListener("change", async event => {
             const target = event.target;
@@ -106,7 +104,6 @@ const { title } = Astro.props;
         }
     });
 </script>
-
 
 <style>
     html,
