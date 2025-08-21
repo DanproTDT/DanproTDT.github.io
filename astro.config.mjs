@@ -5,7 +5,7 @@ import node from '@astrojs/node';
 
 export default defineConfig({
     site: 'https://DanproTDT.github.io',
-    output: 'server', // Esto es clave para habilitar endpoints dinámicos
+    output: 'static', // Esto es clave para habilitar endpoints dinámicos
     adapter: node({ mode: 'standalone' }),
     integrations: [tailwind()]
 });
