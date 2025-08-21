@@ -1,13 +1,8 @@
-# Project_
-
-**Project title:** Homelab implementation for practices of
-Cybersecurity
+# Project : Homelab implementation for practices of Cybersecurity
 
 **Author:** Daniel Carrión
 
 **Role:** Systems engineering student (6th cycle)
-
-**Correo:** [carriondaniel602@gmail.com](mailto:carriondaniel602@gmail.com) · **GitHub:** [@DanproTDT](https://github.com/DanproTDT) · **LinkedIn:** [linkedin.com/in/dacarrionsec](https://www.linkedin.com/in/dacarrionsec)
 
 **Last update date:** 05-20-2025
 
@@ -57,17 +52,17 @@ Continuous improvement.
 
 - Consolidation of technical skills in real environments.
 
-- Preparation for certifications such as Compia Linux+, Security+, etc.
+- Preparation for certifications such as CompTIA Linux+, Pentest+, etc.
 
 - Creation of a demonstrable technical portfolio.
 
 ## 3. Detailed objectives
 
-- Segment Wan / LAN / DMZ with PFSENSE.
+- Segment WAN / LAN / DMZ with pfSense.
 
 - Deploy Active Directory + DNS in LAN.
 
-- Integrate SOUTHETICS AS IDS/IPS.
+- Integrate Suricata AS IDS/IPS.
 
 - Install and configure Splunk Enterprise + Universal Forwarders.
 
@@ -85,7 +80,7 @@ Continuous improvement.
 | Lan | 192.168.1.0/24 | 192.168.1.1 | AD DS, Splunk, Nessus, customers |
 | DMZ | 10.0.0.0/24 | 10.0.0.1 | Ubuntu Server, Web Services |
 
-### 4.2. PFSENSE interfaces
+### 4.2. pfSense interfaces
 
 | **Interface** | **Zone** | **Adapter** |**Function**| **IP**
 |-------|-------|----------| ------------- |------- 
@@ -125,7 +120,7 @@ Continuous improvement.
   ![imagen4](media/imagen4.png)
 
 
-- Assignment of static IPS in LAN and DMZ, and DHCP in LAN.
+- Assignment of static IPs in LAN and DMZ, and DHCP in LAN.
   ![imagen5](media/imagen5.png)  
 
   ![imagen6](media/imagen6.png)  
@@ -177,7 +172,7 @@ Continuous improvement.
   ![imagen15](media/imagen15.png)
 
 
-- Creation of OUS (Workstations, Users) and users (Jhon1, Jhon2).
+- Creation of OUs (Workstations, Users) and users (Jhon1, Jhon2).
   ![imagen16](media/imagen16.png)  
 
   ![imagen17](media/imagen17.png)  
@@ -215,7 +210,7 @@ Continuous improvement.
 
 **Comments**
 
-- The registration in PFSENSE is key for the stations to solve the domain correctly.
+- The registration in pfSense is important for the stations to solve the domain correctly.
 - The GPO allows to verify connectivity between ping stations.
 - Apache is installed as a basis for future penetration tests.
 
@@ -265,7 +260,7 @@ Continuous improvement.
   ![imagen40](media/imagen40.png)
 
 
-- PFSENSE LOGS Redirection Configuration
+- pfSense Logs Redirection Configuration
   ![imagen41](media/imagen41.png)
 
 
@@ -276,14 +271,14 @@ Continuous improvement.
 **Comments**
 
 - The Firewall rule in Windows Server is mandatory to receive data from port 9997.
-- Input UDP allows you to receive PFSENSE logs without Forwarder.
+- Input UDP allows you to receive pfSense logs without Forwarder.
 - The selection of Logs in Ubuntu Server covers key events of the system.
 
 ## 8. Suricata IDS/IPS
 
 ### 8.1. Installation
 
-- Installed from the PFSENSE Package Manager.
+- Installed from the pfSense Package Manager.
   ![imagen43](media/imagen43.png)
 
 
@@ -299,27 +294,27 @@ Continuous improvement.
 
 - Deactivation of:
 
-- Hardware Checksum offloading
-- TCP Segmentation offloading
-- Lark Receive Offloading
+  - Hardware Checksum offloading
+  - TCP Segmentation offloading
+  - Lark Receive Offloading
 
   ![imagen46](media/imagen46.png)
 
 
 ### 8.3. Activated rules
 
-- ET Open RULES AND SNORT GPLV2 RULES ACTIVATED.
+- ET Open Rules and SNORT GPLV2 Rules activated.
   ![imagen47](media/imagen47.png)
 
 
-- Wan configured as IPS (active block)
+- WAN configured as IPS (active block)
   ![imagen48](media/imagen48.png)
 
 
 **Comments**
 
 - If offloading options are not deactivated, Suricata can block DNS traffic by invalid checksums.
-- Etopen and Snort GPLV2 rules were chosen as they are free and do not require authentication.
+- ET Open Rules and Snort GPLV2 rules were chosen as they are free and do not require authentication.
 
 ## 9. Nessus configuration
 
@@ -336,20 +331,20 @@ Continuous improvement.
 
 ### 9.2. Scanning implementation
 
-- Creation of scanning
+- Creation of scanners
   ![imagen51](media/imagen51.png)  
 
   ![imagen52](media/imagen52.png)
 
 
-### 9.3. Scanns made
+### 9.3. Scans made
 
-|**Scan name**|**Area**|**Type of scan**|**Authenticated**|**Result**|
-|-----|-----|------|-----|----|
-| Lan scan | Lan | Complete | Yes |--------|
-| Dmz scan | DMZ | Ports + SSH | Yes |-------|
+|**Scan name**|**Area**| **Type of scan** |**Errors**
+|-----|-----|-----------------|-----
+| Lan scan | Lan | Full| No 
+| Dmz scan | DMZ | Full     | No 
 
-- LAN SCAN
+- LAN Scan
   ![imagen53](media/imagen53.png)
 
 
@@ -359,33 +354,33 @@ Continuous improvement.
 
 **Comments**
 
-- The SSH service in Ubuntu Server allows NESSUS to access the DMZ.
+- The SSH service in Ubuntu Server allows Nessus to access the DMZ.
 - The scans are designed to evaluate vulnerabilities in both network areas.
 
 ## 10. Firewall Rules (Pfsense)
 
-### 10.1. LAN RULES
+### 10.1. LAN Rules
 
-|**Action**|**Protocol**|**Port**|**Destination**|**Description**|
-| ----------- | -------------- | ---------- | -------------- | ------------------------------------------------------------------------------
-| Allow | DNS | 53 | Internet | Name resolution |
-| Allow | Https | 443 | Internet | SAFE WEB ACCESS |
-| Allow | Http | 80 | pfsense gui | Management from Windows Server |
-| Allow | Ssh | 22 | LAN / DMZ | Authenticated scan from Nessus |
-| Allow | Http | 80 | DMZ | Access to Ubuntu Web Server |
-| Allow | ICMP | - | DMZ | Connectivity tests |
+|**Action**|**Protocol**|**Port**|**Destination**| **Description**                 |
+| ----------- | -------------- | ---------- | -------------- |---------------------------------
+| Allow | DNS | 53 | Internet | Name resolution                 |
+| Allow | Https | 443 | Internet | Safe web access                 |
+| Allow | Http | 80 | pfsense gui | Management from Windows Server  |
+| Allow | Ssh | 22 | LAN / DMZ | Authenticated scan from Nessus  |
+| Allow | Http | 80 | DMZ | Access to Ubuntu Web Server     |
+| Allow | ICMP | - | DMZ | Connectivity tests              |
 | Allow | TCP | 9997 | Windows Server | Reception of logs from stations |
-| Block | All | - | - | Unauthorized traffic |
+| Block | All | - | - | Block Unauthorized traffic      |
 
 ![imagen55](media/imagen55.png)
 
 
-### 10.2. DMZ Rules (EM3)
+### 10.2. DMZ Rules
 
-|**Action**|**Protocol**|**Port**|**Destination**|**Description**|
-| ----------- | -------------- | ----------- | --------------- | -----------------------------------
-| Allow | TCP | 9997 | Windows Server | LOGS sending from Ubuntu Server |
-| Block | All | - | - | Unauthorized traffic |
+|**Action**|**Protocol**|**Port**|**Destination**| **Description**                 |
+| ----------- | -------------- | ----------- | --------------- |---------------------------------
+| Allow | TCP | 9997 | Windows Server | Logs sending from Ubuntu Server |
+| Block | All | - | - | Block Unauthorized traffic      |
 
 ![imagen56](media/imagen56.png)
 
@@ -403,27 +398,27 @@ Continuous improvement.
 
 ### 11.1. Test cases
 
-|**Component**|**Proof**| **Result**         |
-| -------------- | -------------------------|--------------------|
-| Splunk | Reception of Logs from UF | Correct            |
-| Ad ds | Union of domain stations | Correct            |
-| Suricata | IDS/IPS alert detection | Correct            |
-| NESSUS | Authenticated scan in LAN/DMZ | Correct            |
+| **Component** |**Proof**| **Result**         |
+|---------------| -------------------------|--------------------|
+| Splunk        | Reception of Logs from UF | Correct            |
+| AD DS         | Union of domain stations | Correct            |
+| Suricata      | IDS/IPS alert detection | Correct            |
+| Nessus        | Authenticated scan in LAN/DMZ | Correct            |
 
 - Splunk
-- Logs to the "Windows" index
-    ![imagen58](media/imagen58.png)
+  - Logs to the "Windows" index
+      ![imagen58](media/imagen58.png)
 
 
-- Logs to the "Ubuntu_Server" index
+  - Logs to the "Ubuntu_Server" index
     ![imagen59](media/imagen59.png)
 
 
-- Logs to the "PfSense" index
+  - Logs to the "PfSense" index
     ![imagen60](media/imagen60.png)
 
 
-- AD ds
+- AD DS (Active Directory Domain Services)
   ![imagen61](media/imagen61.png)
 
 
@@ -432,11 +427,11 @@ Continuous improvement.
 
 
 - Nessus
-- LAN SCAN
-    ![imagen63](media/imagen63.png)
+  - LAN Scan
+      ![imagen63](media/imagen63.png)
 
 
-- DMZ Scan
+  - DMZ Scan
     ![imagen64](media/imagen64.png)
 
 

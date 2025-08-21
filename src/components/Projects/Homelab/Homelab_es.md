@@ -1,13 +1,8 @@
-# Proyecto_
-
-**Título del proyecto:** Implementación de HomeLab para prácticas de
-ciberseguridad
+# Proyecto: Implementación de HomeLab para prácticas de ciberseguridad
 
 **Autor:** Daniel Carrión
 
 **Rol:** Estudiante de Ingeniería de Sistemas (6to ciclo)
-
-**Correo:** [carriondaniel602@gmail.com](mailto:carriondaniel602@gmail.com) · **GitHub:** [@DanproTDT](https://github.com/DanproTDT) · **LinkedIn:** [linkedin.com/in/dacarrionsec](https://www.linkedin.com/in/dacarrionsec)
 
 **Fecha de última actualización:** 20-05-2025
 
@@ -292,10 +287,10 @@ mejora continua.
 
 ### 9.3. Escaneos Realizados
 
-| **Nombre del Escaneo** | **Zona** | **Tipo de Escaneo** | **Autenticado** | **Resultado** |
-|------------------------|----------|---------------------|-----------------|---------------|
-| LAN Scan               | LAN      | Completo            | Sí              |               |
-| DMZ Scan               | DMZ      | Puertos + SSH       | Sí              |               |
+| **Nombre del Escaneo** | **Zona** | **Tipo de Escaneo** | **Errores** 
+|------------------------|----------|---------------------|-----------------
+| LAN Scan               | LAN      | Completo            | No              
+| DMZ Scan               | DMZ      | Completo            | No              
 
 - LAN Scan  
   ![imagen53](media/imagen53.png)
