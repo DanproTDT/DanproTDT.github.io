@@ -52,7 +52,7 @@ mejora continua.
 
 - Consolidación de habilidades técnicas en entornos reales.
 
-- Preparación para certificaciones como CompTIA Linux+, Security+, etc.
+- Preparación para certificaciones como CompTIA Linux+, Pentest+, etc.
 
 - Creación de un portafolio técnico demostrable.
 

@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
     site: 'https://DanproTDT.github.io',
-    output: 'static',
+    output: 'static', // Esto es clave para habilitar endpoints dinámicos
     integrations: [tailwind()]
 });
 

@@ -1,6 +1,6 @@
 # Project : Homelab implementation for practices of Cybersecurity
 
-**Author:** Daniel Carrión
+**Author:** Daniel Carrion
 
 **Role:** Systems engineering student (6th cycle)
 
