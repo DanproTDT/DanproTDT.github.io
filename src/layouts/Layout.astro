@@ -17,19 +17,23 @@ const { title } = Astro.props;
     <title>{title}</title>
 </head>
 <body>
-<header class="flex justify-between items-center px-4 py-3 sm:px-6 sm:py-4">
-    <div class="text-sm text-zinc-400 hidden sm:block"></div>
-    <label for="language-selector" class="sr-only">Idioma</label>
-    <select
-            id="language-selector"
-            class="bg-zinc-800 text-white px-3 py-1 rounded border border-zinc-600"
-    >
-        <option value="es">Español</option>
-        <option value="en">English</option>
-    </select>
+<header class="w-screen flex justify-center pt-6 px-4">
+    <div class="w-[300px] max-w-full">
+        <label for="language-selector" class="sr-only">Idioma</label>
+        <select
+                id="language-selector"
+                class="w-full h-12 text-center bg-zinc-800 border border-zinc-600 rounded px-3 py-2"
+        >
+            <option value="es">Español</option>
+            <option value="en">English</option>
+        </select>
+
+    </div>
 </header>
 
-<main class="px-4 sm:px-6 max-w-screen-md mx-auto">
+
+
+<main class="px-4 sm:px-6 max-w-screen-sm mx-auto">
     <slot />
 </main>
 
@@ -42,6 +46,7 @@ const { title } = Astro.props;
         font-family: 'Lora', sans-serif;
         background-color: #181818;
         color: #fff;
+
     }
 
     select:focus {
@@ -52,15 +57,25 @@ const { title } = Astro.props;
     @media (max-width: 640px) {
         header {
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
         }
 
         #language-selector {
-            width: 100%;
-            max-width: 200px;
+            width: 200px;
+            margin: 0;
+            align-self: flex-start;
+            text-align: center;
+            text-align-last: center;
         }
+        #language-selector option {
+            text-align: center;
+        }
+
     }
+
+
+
 </style>
 
 </body>
@@ -133,9 +148,18 @@ const { title } = Astro.props;
         });
 
         const savedLang = localStorage.getItem("lang");
-        if (savedLang && selector instanceof HTMLSelectElement) {
-            selector.value = savedLang;
-            applyTranslation(savedLang);
+
+        if (selector instanceof HTMLSelectElement) {
+            if (savedLang) {
+                selector.value = savedLang;
+                applyTranslation(savedLang);
+            } else {
+                selector.value = "es";
+                applyTranslation("es");
+                localStorage.setItem("lang", "es"); // Guardar solo una vez
+            }
         }
+
+
     });
 </script>

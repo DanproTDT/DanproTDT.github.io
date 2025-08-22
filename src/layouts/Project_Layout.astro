@@ -85,12 +85,21 @@ const layoutClass = styles[variant] ?? styles.markdown;
             margin: 0;
         }
 
-        .language-selector {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            z-index: 10;
+        @media (max-width: 640px) {
+            .language-selector {
+                position: absolute;
+                top: 1rem;
+                left: 1rem; /* en vez de right */
+                z-index: 10;
+            }
+
+            #language-selector {
+                width: 200px;
+                text-align: center;
+                text-align-last: center;
+            }
         }
+
     </style>
 </head>
 <body class="min-h-screen antialiased">
